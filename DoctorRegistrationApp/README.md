@@ -1,12 +1,32 @@
 # Doctor Registration iOS App
 
-A complete iOS application for doctor registration and management built with UIKit, Storyboards, and MVVM architecture.
+A complete iOS application for doctor registration and management built with UIKit and MVVM architecture.
 
-## 📱 Screenshots
+## 📱 Features
 
-| Registration | Doctors List | Dashboard |
-|--------------|--------------|-----------|
-| Basic Details Form | TableView with doctors | Doctor greeting & actions |
+### Multi-Step Registration (3 slides)
+- **Step 1/3** - Name & Email
+- **Step 2/3** - Phone Number & WhatsApp Number  
+- **Step 3/3** - Gender, Age, Practicing From
+- Slidable pages with arrow navigation
+- Progress bar indicator
+
+### Dashboard
+- Profile header with "Hello, [Name]!" greeting
+- Search bar
+- Health tip banner (closeable)
+- 6 Quick action buttons (Scan, Vaccine, My Bookings, Clinic, Ambulance, Nurse)
+- Footer tab bar (Home, Appointments, Chat, History, Profile)
+- **Logout button** to return to registration
+
+### Doctors List
+- TableView showing all registered doctors
+- Pull-to-refresh functionality
+- Tap to view doctor dashboard
+
+### Mock API
+- Local storage using UserDefaults (no external API dependency)
+- Simulates network delay for realistic UX
 
 ---
 
@@ -14,76 +34,26 @@ A complete iOS application for doctor registration and management built with UIK
 
 ### Prerequisites
 - **macOS** with Xcode 15+ installed
-- iOS Simulator (iPhone 11 or later recommended)
+- iOS Simulator (iPhone 14 or later recommended)
 
 ### Steps
 
-1. **Open the project in Xcode:**
+1. **Open the project:**
    ```bash
    open DoctorRegistrationApp.xcodeproj
    ```
 
-2. **Select a simulator:**
-   - Click on the device dropdown in Xcode toolbar
-   - Choose **iPhone 14** or **iPhone 11**
+2. **Select a development team:**
+   - Project → Signing & Capabilities → Select Team
 
 3. **Build and Run:**
    - Press `Cmd + R` or click the ▶️ Play button
 
 4. **Test the app:**
-   - Fill in the registration form
-   - Tap the blue arrow button to submit
-   - View the doctors list
-   - Tap a doctor to see the dashboard
-
----
-
-## 🔧 Troubleshooting
-
-### Error: "The document could not be opened"
-
-**Symptom:** Storyboard files show errors about duplicate IDs
-
-**Fix:**
-1. Close Xcode completely (`Cmd + Q`)
-2. Delete derived data:
-   ```bash
-   rm -rf ~/Library/Developer/Xcode/DerivedData/DoctorRegistrationApp-*
-   ```
-3. Reopen the project and rebuild (`Cmd + Shift + K`, then `Cmd + B`)
-
----
-
-### Error: "No such module 'UIKit'"
-
-**Fix:**
-1. Clean build folder: `Cmd + Shift + K`
-2. Close and reopen Xcode
-3. Build again: `Cmd + B`
-
----
-
-### Error: "Could not connect to server" / Network errors
-
-**Symptom:** API calls fail
-
-**Check:**
-1. Ensure you have internet connectivity
-2. The API endpoint uses HTTP (not HTTPS) - this is already configured in `Info.plist`
-3. Test the API with curl:
-   ```bash
-   curl -X GET "http://199.192.26.248:8000/sap/opu/odata/sap/ZCDS_C_TEST_REGISTER_NEW_CDS/ZCDS_C_TEST_REGISTER_NEW" -H "Accept: application/json"
-   ```
-
----
-
-### Error: "Signing requires a development team"
-
-**Fix:**
-1. Open Xcode → Project Navigator → DoctorRegistrationApp
-2. Go to **Signing & Capabilities** tab
-3. Select your **Team** from the dropdown
-4. Or select "None" if running on simulator only
+   - Fill in registration (3 steps)
+   - View doctors list
+   - Tap doctor → Dashboard
+   - Tap logout icon to return to start
 
 ---
 
@@ -92,51 +62,54 @@ A complete iOS application for doctor registration and management built with UIK
 ```
 DoctorRegistrationApp/
 ├── Models/
-│   ├── Doctor.swift           # Doctor data model
-│   └── APIModels.swift        # Request/Response models
+│   ├── Doctor.swift
+│   └── APIModels.swift
 ├── ViewModels/
 │   ├── RegistrationViewModel.swift
 │   ├── DoctorsListViewModel.swift
 │   └── DashboardViewModel.swift
 ├── Controllers/
+│   ├── MultiStepRegistrationViewController.swift  ← NEW
 │   ├── RegistrationViewController.swift
 │   ├── DoctorsListViewController.swift
 │   └── DashboardViewController.swift
 ├── Views/
 │   └── DoctorTableViewCell.swift
 ├── Services/
-│   └── APIService.swift       # Network layer
+│   ├── APIService.swift
+│   └── MockAPIService.swift  ← NEW (local storage)
 ├── Extensions/
 │   └── UIView+Extensions.swift
 ├── Base.lproj/
-│   ├── Main.storyboard        # All 3 screens
+│   ├── Main.storyboard
 │   └── LaunchScreen.storyboard
-└── Info.plist                 # App config (HTTP enabled)
+└── Info.plist
 ```
 
 ---
 
-## 🔌 API Endpoints
+## � Registration Fields
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/ZCDS_C_TEST_REGISTER_NEW` | Register new doctor |
-| GET | `/ZCDS_C_TEST_REGISTER_NEW` | Get all doctors |
-| GET | `/ZCDS_C_TEST_REGISTER_NEW(guid'...')` | Get single doctor |
+| Step | Fields |
+|------|--------|
+| 1/3 | Full Name, Email ID |
+| 2/3 | Country Code, Phone Number, WhatsApp Number |
+| 3/3 | Gender (M/F/O), Age, Age Unit, Practicing From (Months/Years) |
 
-**Base URL:** `http://199.192.26.248:8000/sap/opu/odata/sap/ZCDS_C_TEST_REGISTER_NEW_CDS`
-
----
-
-## 📋 Features
-
-- ✅ Registration form with validation
-- ✅ Gender selection (Male/Female/Others)
-- ✅ API integration with URLSession
-- ✅ Doctors list with pull-to-refresh
-- ✅ Dashboard with doctor greeting
-- ✅ Clean MVVM architecture
-- ✅ iOS 13+ support
+### Sample JSON
+```json
+{
+    "Name": "Mahesh",
+    "NameUpper": "MAHESH",
+    "PhoneNo": "7828827654",
+    "WhatsappNo": "7828827654",
+    "CountryCode": "+91",
+    "Email": "mahesh@gmail.com",
+    "Gender": "M",
+    "Age": "21",
+    "AgeUnit": "Y"
+}
+```
 
 ---
 
@@ -144,44 +117,28 @@ DoctorRegistrationApp/
 
 | Component | Technology |
 |-----------|------------|
-| UI Framework | UIKit |
-| Layout | Storyboard + Auto Layout |
+| UI Framework | UIKit (Programmatic + Storyboard) |
 | Architecture | MVVM |
-| Networking | URLSession (no 3rd party) |
+| Data Storage | UserDefaults (Mock API) |
 | Min iOS | 13.0 |
 | Language | Swift 5.0 |
 
 ---
 
-## 📝 Testing the App
+## � Troubleshooting
 
-### Registration Test Data
-```
-Full Name: John Doe
-Email: john@example.com
-Gender: Male
-Practicing From: 06 / 2020
-```
+### "Signing requires a development team"
+1. Open Project → Signing & Capabilities
+2. Select your Team from dropdown
 
-### Expected Flow
-1. Fill form → Tap Submit → Success alert
-2. Tap "Continue" → Doctors List appears
-3. Tap any doctor → Dashboard shows greeting
+### Storyboard errors
+1. Close Xcode (`Cmd + Q`)
+2. Delete derived data: `rm -rf ~/Library/Developer/Xcode/DerivedData/DoctorRegistrationApp-*`
+3. Reopen and clean build (`Cmd + Shift + K`)
 
 ---
 
-## ⚠️ Known Limitations
+## 📧 Author
 
-- Phone, WhatsApp, Country Code, Age fields use default values (hidden in UI)
-- Dashboard quick action buttons are UI-only (no functionality)
-- No data persistence (API is the source of truth)
-
----
-
-## 📧 Support
-
-If you encounter issues not covered here, try:
-1. Clean build: `Cmd + Shift + K`
-2. Delete derived data
-3. Restart Xcode
-4. Check Xcode console for detailed error messages
+**Shaili Nishad**  
+Built for TRRev Assignment
