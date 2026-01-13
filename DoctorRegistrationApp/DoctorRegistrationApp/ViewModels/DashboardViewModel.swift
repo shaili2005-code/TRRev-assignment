@@ -40,14 +40,9 @@ final class DashboardViewModel {
         return doctor?.gender ?? ""
     }
     
-    /// Practising from formatted
-    var practisingFrom: String {
-        return doctor?.practisingFromFormatted ?? ""
-    }
-    
     // MARK: - Methods
     
-    /// Fetches doctor details from the API
+    /// Fetches doctor details from the API using real APIService
     /// - Parameter completion: Completion handler with optional error
     func fetchDoctorDetails(completion: @escaping (Error?) -> Void) {
         guard let guid = doctorGuid else {
@@ -55,7 +50,8 @@ final class DashboardViewModel {
             return
         }
         
-        MockAPIService.shared.fetchDoctor(guid: guid) { [weak self] result in
+        // Using REAL API
+        APIService.shared.fetchDoctor(guid: guid) { [weak self] result in
             switch result {
             case .success(let doctor):
                 self?.doctor = doctor

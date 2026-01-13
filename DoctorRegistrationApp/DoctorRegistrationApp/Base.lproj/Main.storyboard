@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="navCtrl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="navCtrl">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!-- Navigation Controller -->
+        <!--Navigation Controller-->
         <scene sceneID="navScene">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="navCtrl" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="navBar">
-                        <rect key="frame" x="0.0" y="44" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -19,30 +22,118 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="navFR" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-700" y="0"/>
+            <point key="canvasLocation" x="-900" y="0.0"/>
         </scene>
-        
-        <!-- Multi-Step Registration (Programmatic UI) -->
+        <!--Multi Step Registration View Controller-->
         <scene sceneID="regScene">
             <objects>
                 <viewController id="regVC" customClass="MultiStepRegistrationViewController" customModule="DoctorRegistrationApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="regView">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="backBtn">
+                                <rect key="frame" x="16" y="128" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="bh"/>
+                                    <constraint firstAttribute="width" constant="40" id="bw"/>
+                                </constraints>
+                                <state key="normal" title="‹"/>
+                                <connections>
+                                    <action selector="backTapped:" destination="regVC" eventType="touchUpInside" id="ba"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="progGray">
+                                <rect key="frame" x="16" y="178" width="361" height="4"/>
+                                <color key="backgroundColor" red="0.90000000000000002" green="0.90000000000000002" blue="0.92000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="pgh"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="progOrange">
+                                <rect key="frame" x="16" y="178" width="120" height="4"/>
+                                <color key="backgroundColor" red="0.95999999999999996" green="0.65000000000000002" blue="0.14000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="poh"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="1/3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stepLbl">
+                                <rect key="frame" x="182.33333333333334" y="192" width="28.666666666666657" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Basic Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="titleLbl">
+                                <rect key="frame" x="16" y="224" width="361" height="31"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Enter your details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="subLbl">
+                                <rect key="frame" x="16" y="259" width="361" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="actionBtn">
+                                <rect key="frame" x="161.66666666666666" y="674" width="70" height="70"/>
+                                <color key="backgroundColor" red="0.25" green="0.34999999999999998" blue="0.65000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="abh"/>
+                                    <constraint firstAttribute="width" constant="70" id="abw"/>
+                                </constraints>
+                                <state key="normal" title="→">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="actionButtonTapped:" destination="regVC" eventType="touchUpInside" id="aba"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="regAI">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="regSA"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="backBtn" firstAttribute="top" secondItem="regSA" secondAttribute="top" constant="10" id="c1"/>
+                            <constraint firstItem="titleLbl" firstAttribute="top" secondItem="stepLbl" secondAttribute="bottom" constant="8" id="c10"/>
+                            <constraint firstItem="titleLbl" firstAttribute="leading" secondItem="regView" secondAttribute="leading" constant="16" id="c11"/>
+                            <constraint firstItem="titleLbl" firstAttribute="trailing" secondItem="regView" secondAttribute="trailing" constant="-16" id="c12"/>
+                            <constraint firstItem="subLbl" firstAttribute="top" secondItem="titleLbl" secondAttribute="bottom" constant="4" id="c13"/>
+                            <constraint firstItem="subLbl" firstAttribute="leading" secondItem="regView" secondAttribute="leading" constant="16" id="c14"/>
+                            <constraint firstItem="subLbl" firstAttribute="trailing" secondItem="regView" secondAttribute="trailing" constant="-16" id="c15"/>
+                            <constraint firstItem="backBtn" firstAttribute="leading" secondItem="regView" secondAttribute="leading" constant="16" id="c2"/>
+                            <constraint firstItem="actionBtn" firstAttribute="centerX" secondItem="regView" secondAttribute="centerX" id="c25"/>
+                            <constraint firstItem="actionBtn" firstAttribute="bottom" secondItem="regSA" secondAttribute="bottom" constant="-40" id="c26"/>
+                            <constraint firstItem="regAI" firstAttribute="centerX" secondItem="regView" secondAttribute="centerX" id="c27"/>
+                            <constraint firstItem="regAI" firstAttribute="centerY" secondItem="regView" secondAttribute="centerY" id="c28"/>
+                            <constraint firstItem="progGray" firstAttribute="top" secondItem="backBtn" secondAttribute="bottom" constant="10" id="c3"/>
+                            <constraint firstItem="progGray" firstAttribute="leading" secondItem="regView" secondAttribute="leading" constant="16" id="c4"/>
+                            <constraint firstItem="progGray" firstAttribute="trailing" secondItem="regView" secondAttribute="trailing" constant="-16" id="c5"/>
+                            <constraint firstItem="progOrange" firstAttribute="top" secondItem="progGray" secondAttribute="top" id="c6"/>
+                            <constraint firstItem="progOrange" firstAttribute="leading" secondItem="progGray" secondAttribute="leading" id="c7"/>
+                            <constraint firstItem="stepLbl" firstAttribute="top" secondItem="progGray" secondAttribute="bottom" constant="10" id="c8"/>
+                            <constraint firstItem="stepLbl" firstAttribute="centerX" secondItem="regView" secondAttribute="centerX" id="c9"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="regNI"/>
                     <connections>
+                        <outlet property="actionButton" destination="actionBtn" id="o1"/>
+                        <outlet property="activityIndicator" destination="regAI" id="o2"/>
+                        <outlet property="progressBarOrange" destination="progOrange" id="o13"/>
+                        <outlet property="progressContainer" destination="progGray" id="o22"/>
+                        <outlet property="stepLabel" destination="stepLbl" id="o17"/>
+                        <outlet property="subtitleLabel" destination="subLbl" id="o18"/>
+                        <outlet property="titleLabel" destination="titleLbl" id="o19"/>
                         <segue destination="listVC" kind="show" identifier="showDoctorsList" id="regToList"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="regFR" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="0"/>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        
-        <!-- Doctors List -->
+        <!--Doctors-->
         <scene sceneID="listScene">
             <objects>
                 <viewController id="listVC" customClass="DoctorsListViewController" customModule="DoctorRegistrationApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -51,64 +142,213 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="listTV">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No doctors registered yet.&#10;Pull to refresh." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="listEmpty">
-                                <rect key="frame" x="96" y="416" width="200" height="40"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="No doctors yet. Pull to refresh." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="listEmpty">
+                                <rect key="frame" x="86" y="416.33333333333331" width="221" height="19.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="listAI">
-                                <rect key="frame" x="178" y="408" width="37" height="37"/>
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="listSA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="listTV" firstAttribute="top" secondItem="listSA" secondAttribute="top" id="listC1"/>
-                            <constraint firstItem="listTV" firstAttribute="leading" secondItem="listSA" secondAttribute="leading" id="listC2"/>
-                            <constraint firstItem="listTV" firstAttribute="trailing" secondItem="listSA" secondAttribute="trailing" id="listC3"/>
-                            <constraint firstItem="listTV" firstAttribute="bottom" secondItem="listSA" secondAttribute="bottom" id="listC4"/>
-                            <constraint firstItem="listEmpty" firstAttribute="centerX" secondItem="listView" secondAttribute="centerX" id="listC5"/>
-                            <constraint firstItem="listEmpty" firstAttribute="centerY" secondItem="listView" secondAttribute="centerY" id="listC6"/>
-                            <constraint firstItem="listAI" firstAttribute="centerX" secondItem="listView" secondAttribute="centerX" id="listC7"/>
-                            <constraint firstItem="listAI" firstAttribute="centerY" secondItem="listView" secondAttribute="centerY" id="listC8"/>
+                            <constraint firstItem="listTV" firstAttribute="top" secondItem="listSA" secondAttribute="top" id="lc1"/>
+                            <constraint firstItem="listTV" firstAttribute="leading" secondItem="listSA" secondAttribute="leading" id="lc2"/>
+                            <constraint firstItem="listTV" firstAttribute="trailing" secondItem="listSA" secondAttribute="trailing" id="lc3"/>
+                            <constraint firstItem="listTV" firstAttribute="bottom" secondItem="listSA" secondAttribute="bottom" id="lc4"/>
+                            <constraint firstItem="listEmpty" firstAttribute="centerX" secondItem="listView" secondAttribute="centerX" id="lc5"/>
+                            <constraint firstItem="listEmpty" firstAttribute="centerY" secondItem="listView" secondAttribute="centerY" id="lc6"/>
+                            <constraint firstItem="listAI" firstAttribute="centerX" secondItem="listView" secondAttribute="centerX" id="lc7"/>
+                            <constraint firstItem="listAI" firstAttribute="centerY" secondItem="listView" secondAttribute="centerY" id="lc8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Doctors" id="listNI"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="listAI" id="listO1"/>
-                        <outlet property="emptyStateLabel" destination="listEmpty" id="listO2"/>
-                        <outlet property="tableView" destination="listTV" id="listO3"/>
+                        <outlet property="activityIndicator" destination="listAI" id="lo1"/>
+                        <outlet property="emptyStateLabel" destination="listEmpty" id="lo2"/>
+                        <outlet property="tableView" destination="listTV" id="lo3"/>
                         <segue destination="dashVC" kind="show" identifier="showDashboard" id="listToDash"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="listFR" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="0"/>
+            <point key="canvasLocation" x="900" y="0.0"/>
         </scene>
-        
-        <!-- Dashboard (Programmatic UI) -->
+        <!--Dashboard View Controller-->
         <scene sceneID="dashScene">
             <objects>
                 <viewController id="dashVC" customClass="DashboardViewController" customModule="DoctorRegistrationApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dashView">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="headerView">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="profileImg">
+                                        <rect key="frame" x="20" y="55" width="50" height="50"/>
+                                        <color key="backgroundColor" red="0.90000000000000002" green="0.84999999999999998" blue="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="pih"/>
+                                            <constraint firstAttribute="width" constant="50" id="piw"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Hello," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="greetLbl">
+                                        <rect key="frame" x="82" y="55" width="37" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Doctor!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nameLbl">
+                                        <rect key="frame" x="82" y="74" width="77.333333333333314" height="26"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="logoutBtn">
+                                        <rect key="frame" x="333" y="60" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="lbh"/>
+                                            <constraint firstAttribute="width" constant="40" id="lbw"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.90000000000000002" green="0.29999999999999999" blue="0.29999999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="rectangle.portrait.and.arrow.right"/>
+                                        <connections>
+                                            <action selector="logoutTapped:" destination="dashVC" eventType="touchUpInside" id="logoutAction"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.91000000000000003" green="0.95999999999999996" blue="0.98999999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="profileImg" firstAttribute="leading" secondItem="headerView" secondAttribute="leading" constant="20" id="h1"/>
+                                    <constraint firstItem="profileImg" firstAttribute="centerY" secondItem="headerView" secondAttribute="centerY" constant="20" id="h2"/>
+                                    <constraint firstItem="greetLbl" firstAttribute="leading" secondItem="profileImg" secondAttribute="trailing" constant="12" id="h3"/>
+                                    <constraint firstItem="greetLbl" firstAttribute="top" secondItem="profileImg" secondAttribute="top" id="h4"/>
+                                    <constraint firstItem="nameLbl" firstAttribute="leading" secondItem="greetLbl" secondAttribute="leading" id="h5"/>
+                                    <constraint firstItem="nameLbl" firstAttribute="top" secondItem="greetLbl" secondAttribute="bottom" constant="2" id="h6"/>
+                                    <constraint firstItem="logoutBtn" firstAttribute="trailing" secondItem="headerView" secondAttribute="trailing" constant="-20" id="h7"/>
+                                    <constraint firstItem="logoutBtn" firstAttribute="centerY" secondItem="profileImg" secondAttribute="centerY" id="h8"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="searchBar">
+                                <rect key="frame" x="20" y="136" width="353" height="50"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="magnifyingglass" translatesAutoresizingMaskIntoConstraints="NO" id="searchIcon">
+                                        <rect key="frame" x="16" y="15" width="20" height="20"/>
+                                        <color key="tintColor" systemColor="tertiaryLabelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="sih"/>
+                                            <constraint firstAttribute="width" constant="20" id="siw"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Search..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="searchPlaceholder">
+                                        <rect key="frame" x="48" y="15" width="64" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" systemColor="tertiaryLabelColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="searchIcon" firstAttribute="leading" secondItem="searchBar" secondAttribute="leading" constant="16" id="sb1"/>
+                                    <constraint firstItem="searchIcon" firstAttribute="centerY" secondItem="searchBar" secondAttribute="centerY" id="sb2"/>
+                                    <constraint firstItem="searchPlaceholder" firstAttribute="leading" secondItem="searchIcon" secondAttribute="trailing" constant="12" id="sb3"/>
+                                    <constraint firstItem="searchPlaceholder" firstAttribute="centerY" secondItem="searchBar" secondAttribute="centerY" id="sb4"/>
+                                    <constraint firstAttribute="height" constant="50" id="sbh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bannerView">
+                                <rect key="frame" x="20" y="202" width="353" height="140"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bannerTitle">
+                                        <rect key="frame" x="20.000000000000007" y="20" width="115.66666666666669" height="43"/>
+                                        <string key="text">Stay Safe
+Stay Healthy!</string>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bannerSub">
+                                        <rect key="frame" x="20" y="71" width="130.33333333333334" height="28.666666666666671"/>
+                                        <string key="text">An apple a day
+keeps the doctor away.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.34999999999999998" green="0.45000000000000001" blue="0.84999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bannerTitle" firstAttribute="leading" secondItem="bannerView" secondAttribute="leading" constant="20" id="bv1"/>
+                                    <constraint firstItem="bannerTitle" firstAttribute="top" secondItem="bannerView" secondAttribute="top" constant="20" id="bv2"/>
+                                    <constraint firstItem="bannerSub" firstAttribute="leading" secondItem="bannerTitle" secondAttribute="leading" id="bv3"/>
+                                    <constraint firstItem="bannerSub" firstAttribute="top" secondItem="bannerTitle" secondAttribute="bottom" constant="8" id="bv4"/>
+                                    <constraint firstAttribute="height" constant="140" id="bvh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="At your Fingertip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sectionTitle">
+                                <rect key="frame" x="20" y="366" width="157" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="dashAI">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dashSA"/>
-                        <color key="backgroundColor" red="0.95" green="0.97" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.94999999999999996" green="0.96999999999999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="headerView" firstAttribute="top" secondItem="dashView" secondAttribute="top" id="d1"/>
+                            <constraint firstItem="bannerView" firstAttribute="trailing" secondItem="dashView" secondAttribute="trailing" constant="-20" id="d10"/>
+                            <constraint firstItem="sectionTitle" firstAttribute="top" secondItem="bannerView" secondAttribute="bottom" constant="24" id="d11"/>
+                            <constraint firstItem="sectionTitle" firstAttribute="leading" secondItem="dashView" secondAttribute="leading" constant="20" id="d12"/>
+                            <constraint firstItem="dashAI" firstAttribute="centerX" secondItem="dashView" secondAttribute="centerX" id="d13"/>
+                            <constraint firstItem="dashAI" firstAttribute="centerY" secondItem="dashView" secondAttribute="centerY" id="d14"/>
+                            <constraint firstItem="headerView" firstAttribute="leading" secondItem="dashView" secondAttribute="leading" id="d2"/>
+                            <constraint firstItem="headerView" firstAttribute="trailing" secondItem="dashView" secondAttribute="trailing" id="d3"/>
+                            <constraint firstItem="headerView" firstAttribute="height" constant="120" id="d4"/>
+                            <constraint firstItem="searchBar" firstAttribute="top" secondItem="headerView" secondAttribute="bottom" constant="16" id="d5"/>
+                            <constraint firstItem="searchBar" firstAttribute="leading" secondItem="dashView" secondAttribute="leading" constant="20" id="d6"/>
+                            <constraint firstItem="searchBar" firstAttribute="trailing" secondItem="dashView" secondAttribute="trailing" constant="-20" id="d7"/>
+                            <constraint firstItem="bannerView" firstAttribute="top" secondItem="searchBar" secondAttribute="bottom" constant="16" id="d8"/>
+                            <constraint firstItem="bannerView" firstAttribute="leading" secondItem="dashView" secondAttribute="leading" constant="20" id="d9"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dashNI"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="dashAI" id="do2"/>
+                        <outlet property="nameLabel" destination="nameLbl" id="do1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dashFR" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1700" y="0"/>
+            <point key="canvasLocation" x="1800" y="0.0"/>
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass" width="128" height="128"/>
+        <image name="rectangle.portrait.and.arrow.right" width="128" height="128"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

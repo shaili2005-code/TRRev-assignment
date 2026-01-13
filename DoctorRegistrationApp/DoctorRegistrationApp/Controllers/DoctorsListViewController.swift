@@ -20,6 +20,7 @@ class DoctorsListViewController: UIViewController {
     private let viewModel = DoctorsListViewModel()
     private let refreshControl = UIRefreshControl()
     private var selectedDoctor: Doctor?
+    private var searchController: UISearchController!
     
     // MARK: - Lifecycle
     
@@ -58,6 +59,22 @@ class DoctorsListViewController: UIViewController {
         
         // Hide back button text
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        setupSearch()
+    }
+    
+    private func setupSearch() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Doctors"
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        
+        // Use table header view instead of navigation item for consistent positioning
+        tableView.tableHeaderView = searchController.searchBar
+        
+        definesPresentationContext = true
     }
     
     private func setupTableView() {
@@ -89,12 +106,18 @@ class DoctorsListViewController: UIViewController {
             self?.refreshControl.endRefreshing()
             
             if let error = error {
-                self?.showAlert(title: "Error", message: error.localizedDescription)
+                let errorMsg = "Error: \(error.localizedDescription)"
+                self?.emptyStateLabel.text = errorMsg
+                self?.showAlert(title: "Error", message: errorMsg)
                 self?.updateEmptyState()
                 return
             }
             
             self?.tableView.reloadData()
+            
+            if self?.viewModel.isEmpty == true {
+                self?.emptyStateLabel.text = "Server returned 0 doctors.\nPull to refresh."
+            }
             self?.updateEmptyState()
         }
     }
@@ -155,5 +178,19 @@ extension DoctorsListViewController: UITableViewDelegate {
             selectedDoctor = doctor
             performSegue(withIdentifier: "showDashboard", sender: nil)
         }
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension DoctorsListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        viewModel.search(query: text)
+        tableView.reloadData()
+        updateEmptyState()
+        
+        // Debug Visual: Show count in title
+        title = "Doctors (\(viewModel.numberOfDoctors))"
     }
 }

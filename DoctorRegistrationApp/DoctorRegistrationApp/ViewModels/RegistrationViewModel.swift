@@ -16,16 +16,14 @@ final class RegistrationViewModel {
     var email: String = ""
     var phoneNumber: String = ""
     var whatsappNumber: String = ""
-    var countryCode: String = "+91"
-    var gender: String = "Male"
+    var countryCode: String = "IN"  // CountryCode should be "IN" not "+91"
+    var gender: String = "M"        // Gender should be single letter
     var age: String = ""
-    var ageUnit: String = "Years"
-    var practFromMonth: String = ""
-    var practFromYear: String = ""
+    var ageUnit: String = "Y"       // AgeUnit should be single letter
     
     // MARK: - Validation
     
-    /// Validates all input fields (only visible fields in UI)
+    /// Validates all input fields
     /// - Throws: ValidationError if any field is invalid
     func validateInputs() throws {
         // Name validation
@@ -42,24 +40,19 @@ final class RegistrationViewModel {
             throw ValidationError.invalidEmail
         }
         
-        // Practicing From validation (visible in UI)
-        guard !practFromMonth.trimmingCharacters(in: .whitespaces).isEmpty else {
-            throw ValidationError.emptyField("Practicing From (Months)")
+        // Phone validation
+        guard !phoneNumber.trimmingCharacters(in: .whitespaces).isEmpty else {
+            throw ValidationError.emptyField("Phone Number")
         }
         
-        guard !practFromYear.trimmingCharacters(in: .whitespaces).isEmpty else {
-            throw ValidationError.emptyField("Practicing From (Years)")
+        // Age validation
+        guard !age.trimmingCharacters(in: .whitespaces).isEmpty else {
+            throw ValidationError.emptyField("Age")
         }
         
-        // Set default values for hidden fields if empty
-        if phoneNumber.isEmpty {
-            phoneNumber = "9999999999"
-        }
+        // Set WhatsApp to phone if empty
         if whatsappNumber.isEmpty {
             whatsappNumber = phoneNumber
-        }
-        if age.isEmpty {
-            age = "30"
         }
     }
     
@@ -71,18 +64,16 @@ final class RegistrationViewModel {
         let request = RegistrationRequest(
             name: name.trimmingCharacters(in: .whitespaces),
             nameUpper: name.trimmingCharacters(in: .whitespaces).uppercased(),
-            email: email.trimmingCharacters(in: .whitespaces),
             phoneNumber: phoneNumber.trimmingCharacters(in: .whitespaces),
-            whatsappNumber: whatsappNumber.trimmingCharacters(in: .whitespaces),
-            countryCode: countryCode.trimmingCharacters(in: .whitespaces),
-            gender: gender,
+            whatsappNumber: (whatsappNumber.isEmpty ? phoneNumber : whatsappNumber).trimmingCharacters(in: .whitespaces),
+            countryCode: "IN",  // As per assignment spec
+            email: email.trimmingCharacters(in: .whitespaces),
+            gender: gender,     // Should be "M", "F", or "O"
             age: age.trimmingCharacters(in: .whitespaces),
-            ageUnit: ageUnit,
-            practFromMonth: practFromMonth.trimmingCharacters(in: .whitespaces),
-            practFromYear: practFromYear.trimmingCharacters(in: .whitespaces)
+            ageUnit: "Y"        // As per assignment spec
         )
         
-        MockAPIService.shared.registerDoctor(request: request, completion: completion)
+        APIService.shared.registerDoctor(request: request, completion: completion)
     }
     
     // MARK: - Private Helpers

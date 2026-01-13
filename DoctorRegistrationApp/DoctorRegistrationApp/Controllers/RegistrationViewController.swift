@@ -212,12 +212,10 @@ class RegistrationViewController: UIViewController {
         viewModel.email = emailTextField.text ?? ""
         viewModel.phoneNumber = phoneTextField.text ?? ""
         viewModel.whatsappNumber = whatsappTextField.text ?? ""
-        viewModel.countryCode = countryCodeTextField.text ?? "+91"
-        viewModel.gender = selectedGender
+        viewModel.countryCode = "IN"  // As per API spec
+        viewModel.gender = selectedGender == "Male" ? "M" : (selectedGender == "Female" ? "F" : "O")
         viewModel.age = ageTextField.text ?? ""
-        viewModel.ageUnit = ageUnitTextField.text ?? "Years"
-        viewModel.practFromMonth = monthsTextField.text ?? ""
-        viewModel.practFromYear = yearsTextField.text ?? ""
+        viewModel.ageUnit = "Y"  // As per API spec
         
         // Validate inputs
         do {

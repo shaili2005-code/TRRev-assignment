@@ -179,9 +179,9 @@ class DoctorTableViewCell: UITableViewCell {
     func configure(with doctor: Doctor) {
         nameLabel.text = doctor.name
         emailLabel.text = doctor.email
-        genderLabel.text = doctor.gender
+        genderLabel.text = "Gender: \(doctor.gender)"
         guidLabel.text = "ID: \(doctor.shortGuid)"
-        practisingLabel.text = "Practising From: \(doctor.practisingFromFormatted)"
+        practisingLabel.text = "Age: \(doctor.age) \(doctor.ageUnit)"
         
         // Avatar initials
         let initials = doctor.name

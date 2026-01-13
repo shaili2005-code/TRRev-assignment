@@ -12,6 +12,7 @@ final class DoctorsListViewModel {
     
     // MARK: - Properties
     
+    private var allDoctors: [Doctor] = []
     private(set) var doctors: [Doctor] = []
     
     /// Number of doctors in the list
@@ -21,23 +22,38 @@ final class DoctorsListViewModel {
     
     /// Whether the list is empty
     var isEmpty: Bool {
-        return doctors.isEmpty
+        return allDoctors.isEmpty // Check if any doctors exist at all
     }
     
     // MARK: - Methods
     
-    /// Fetches all doctors from the Mock API
+    /// Fetches all doctors
     /// - Parameter completion: Completion handler with optional error
     func fetchDoctors(completion: @escaping (Error?) -> Void) {
-        MockAPIService.shared.fetchDoctors { [weak self] result in
+        APIService.shared.fetchDoctors { [weak self] result in
             switch result {
             case .success(let doctors):
+                self?.allDoctors = doctors
                 self?.doctors = doctors
                 completion(nil)
             case .failure(let error):
                 completion(error)
             }
         }
+    }
+    
+    /// Filter doctors by name
+    func search(query: String) {
+        print("🔍 Searching for: '\(query)' in \(allDoctors.count) doctors")
+        if query.isEmpty {
+            doctors = allDoctors
+        } else {
+            doctors = allDoctors.filter { doctor in
+                let match = doctor.name.localizedCaseInsensitiveContains(query)
+                return match
+            }
+        }
+        print("✅ Found \(doctors.count) matches")
     }
     
     /// Gets a doctor at a specific index

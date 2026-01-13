@@ -24,9 +24,10 @@ A complete iOS application for doctor registration and management built with UIK
 - Pull-to-refresh functionality
 - Tap to view doctor dashboard
 
-### Mock API
-- Local storage using UserDefaults (no external API dependency)
-- Simulates network delay for realistic UX
+### Real API Integration
+- Integrated with SAP OData Service (`ZCDS_C_TEST_REGISTER_NEW`)
+- Handles complex JSON/OData structures (d-wrapper parsing)
+- Supported Operations: POST (Register), GET (List Doctors), GET (Doctor Details)
 
 ---
 
@@ -76,8 +77,8 @@ DoctorRegistrationApp/
 ├── Views/
 │   └── DoctorTableViewCell.swift
 ├── Services/
-│   ├── APIService.swift
-│   └── MockAPIService.swift  ← NEW (local storage)
+│   ├── APIService.swift      ← NEW (Real OData Networking)
+│   └── MockAPIService.swift  (Legacy/Fallback)
 ├── Extensions/
 │   └── UIView+Extensions.swift
 ├── Base.lproj/
@@ -119,7 +120,7 @@ DoctorRegistrationApp/
 |-----------|------------|
 | UI Framework | UIKit (Programmatic + Storyboard) |
 | Architecture | MVVM |
-| Data Storage | UserDefaults (Mock API) |
+| Data Storage | SAP OData Service (Remote) |
 | Min iOS | 13.0 |
 | Language | Swift 5.0 |
 

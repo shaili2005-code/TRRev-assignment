@@ -19,27 +19,22 @@ struct Doctor: Codable {
     let gender: String
     let age: String
     let ageUnit: String
-    let practFromMonth: String
-    let practFromYear: String
+    let practFromMonth: String?  // Optional - may not be in response
+    let practFromYear: String?   // Optional - may not be in response
     
     enum CodingKeys: String, CodingKey {
-        case guid = "Guid"
+        case guid = "ID" // API returns "ID", not "Guid"
         case name = "Name"
         case nameUpper = "NameUpper"
         case email = "Email"
-        case phoneNumber = "PhoneNumber"
-        case whatsappNumber = "WhatsappNumber"
+        case phoneNumber = "PhoneNo"
+        case whatsappNumber = "WhatsappNo"
         case countryCode = "CountryCode"
         case gender = "Gender"
         case age = "Age"
         case ageUnit = "AgeUnit"
         case practFromMonth = "PractFromMonth"
         case practFromYear = "PractFromYear"
-    }
-    
-    /// Formatted practising from string
-    var practisingFromFormatted: String {
-        return "\(practFromMonth)/\(practFromYear)"
     }
     
     /// Short GUID for display purposes
